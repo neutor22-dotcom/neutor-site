@@ -32,9 +32,10 @@
           <li><a href="#channels">Channels</a></li>
           <li><a href="#quest">Quest 3 vs 3S</a></li>
           <li><a href="#community">Community</a></li>
+          <li><a href="#apply">Apply</a></li>
         </ul>
       </nav>
-      <a class="btn btn-primary btn-sm" href="#contact">Work with me</a>
+      <a class="btn btn-primary btn-sm" href="#apply">Apply to sponsor</a>
     </div>
   </header>
 
@@ -388,6 +389,84 @@
       </div>
     </section>
 
+    <!-- APPLY TO SPONSOR (posts to a Google Form; responses land in a private sheet) -->
+    <section class="section apply" id="apply" aria-labelledby="apply-title">
+      <div class="wrap apply-inner">
+        <div class="apply-intro">
+          <p class="eyebrow">Brands, studios, game devs</p>
+          <h2 id="apply-title" class="section-title">Apply to sponsor</h2>
+          <p class="section-lead">Tell me about your game, headset or product. I read every application and reply to the ones that fit my channels.</p>
+          <ul class="apply-points">
+            <li>Integrated segments, dedicated videos and Shorts</li>
+            <li>Review units and early access builds</li>
+            <li>Four VR channels, one audience that plays</li>
+          </ul>
+        </div>
+
+        <form class="apply-form" id="apply-form" novalidate method="post"
+              action="https://docs.google.com/forms/d/e/FORM_PUBLIC_ID/formResponse">
+          <div class="field-row">
+            <div class="field">
+              <label for="ap-company">Company or brand <span class="req" aria-hidden="true">*</span></label>
+              <input id="ap-company" name="entry.COMPANY" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="ap-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="ap-name" name="entry.NAME" type="text" autocomplete="name" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="ap-email">Contact email <span class="req" aria-hidden="true">*</span></label>
+              <input id="ap-email" name="entry.EMAIL" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="ap-site">Website <span class="opt">(optional)</span></label>
+              <input id="ap-site" name="entry.WEBSITE" type="url" inputmode="url" autocomplete="url" placeholder="https://">
+            </div>
+          </div>
+          <div class="field">
+            <label for="ap-what">What are you promoting? <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="ap-what" name="entry.PROMOTING" rows="3" required></textarea>
+          </div>
+          <fieldset class="field">
+            <legend>Which channels?</legend>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTORR+ (UG VR)"><span>NEUTORR+ <small>UG VR</small></span></label>
+              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTORX (Hero X Hero)"><span>NEUTORX <small>Hero X Hero</small></span></label>
+              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTOR THE MONKE (Animal Company)"><span>NEUTOR THE MONKE <small>Animal Company</small></span></label>
+              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTOR (Gorilla Tag)"><span>NEUTOR <small>Gorilla Tag</small></span></label>
+              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="Not sure yet"><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="ap-budget">Budget (USD)</label>
+            <select id="ap-budget" name="entry.BUDGET">
+              <option value="">Choose one</option>
+              <option>Under $500</option>
+              <option>$500-$1,000</option>
+              <option>$1,000-$2,500</option>
+              <option>$2,500-$5,000</option>
+              <option>$5,000+</option>
+              <option>Product / review unit only</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ap-notes">Timeline and anything else</label>
+            <textarea id="ap-notes" name="entry.NOTES" rows="3"></textarea>
+          </div>
+          <p class="form-error" id="apply-error" role="alert" hidden></p>
+          <button class="btn btn-primary btn-lg" type="submit">Send application</button>
+          <p class="fine">Applications go straight to me. I don't share them.</p>
+        </form>
+
+        <div class="apply-thanks" id="apply-thanks" tabindex="-1" hidden>
+          <h3>Application sent</h3>
+          <p>Thanks! I'll read it and get back to you by email if it's a fit.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-inner">
@@ -398,6 +477,7 @@
         </div>
         <div class="contact-actions">
           <a class="btn btn-primary btn-lg" href="mailto:neutor22@gmail.com?subject=Partnership%20with%20NEUTOR">neutor22@gmail.com</a>
+          <a class="btn btn-ghost" href="#apply">Apply to sponsor</a>
           <a class="btn btn-ghost" href="https://www.youtube.com/@NEUTOR_VRR" target="_blank" rel="noopener">YouTube<span class="visually-hidden"> (opens in a new tab)</span></a>
         </div>
       </div>

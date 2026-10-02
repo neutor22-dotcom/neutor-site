@@ -102,7 +102,7 @@
 
   /* ---------- Reveal on scroll ---------- */
   if (!reduceMotion && "IntersectionObserver" in window) {
-    const groups = [".stat", ".channel", ".versus", ".tests li", ".signal", ".yt", ".contact-inner"];
+    const groups = [".stat", ".channel", ".versus", ".tests li", ".signal", ".yt", ".apply-inner", ".contact-inner"];
     const items = [];
     groups.forEach((sel) => {
       document.querySelectorAll(sel).forEach((el, i) => {
@@ -117,6 +117,46 @@
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
     items.forEach((el) => rio.observe(el));
+  }
+
+  /* ---------- Apply to sponsor: post to the Google Form ---------- */
+  const applyForm = document.getElementById("apply-form");
+  if (applyForm) {
+    const errorEl = document.getElementById("apply-error");
+    const thanks = document.getElementById("apply-thanks");
+    const button = applyForm.querySelector('button[type="submit"]');
+    const showError = (msg) => { errorEl.textContent = msg; errorEl.hidden = false; };
+
+    applyForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorEl.hidden = true;
+      let firstBad = null;
+      applyForm.querySelectorAll("input, textarea, select").forEach((el) => {
+        if (el.type === "checkbox") return;
+        el.value = el.value.trim();
+        const bad = !el.checkValidity();
+        el.setAttribute("aria-invalid", bad ? "true" : "false");
+        if (bad && !firstBad) firstBad = el;
+      });
+      if (firstBad) {
+        showError("Please fill in the required fields and check your email address.");
+        firstBad.focus();
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Sending…";
+      try {
+        // Google Forms sends no CORS headers, so the response is opaque; reaching it counts as sent
+        await fetch(applyForm.action, { method: "POST", mode: "no-cors", body: new FormData(applyForm) });
+        applyForm.hidden = true;
+        thanks.hidden = false;
+        thanks.focus();
+      } catch (err) {
+        showError("That didn't send. Check your connection and try again.");
+        button.disabled = false;
+        button.textContent = "Send application";
+      }
+    });
   }
 
   /* ---------- Hero: headsets float, then drop onto the platform ---------- */
