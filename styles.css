@@ -77,9 +77,8 @@ p { margin: 0; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand-mark {
-  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--cyan), var(--blue) 55%, var(--indigo));
-  color: #000; font-family: var(--display); font-weight: 900; font-size: 18px;
+  width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+  box-shadow: 0 0 0 2px var(--cyan), 0 0 18px rgba(1,255,255,.35);
 }
 .brand-text { font-family: var(--display); font-weight: 900; letter-spacing: .04em; font-size: 16px; }
 .brand-text span { color: var(--ink-3); font-weight: 700; letter-spacing: .02em; }
@@ -340,7 +339,8 @@ p { margin: 0; }
 .flip-why strong { color: var(--ink); }
 
 @media (hover: hover) and (pointer: fine) {
-  .flip:hover .flip-inner { transform: rotateY(180deg); }
+  /* hero headsets only flip once they've landed, so a still cursor doesn't catch them mid-float */
+  .versus .flip:hover .flip-inner, .stage.landed .flip:hover .flip-inner { transform: rotateY(180deg); }
 }
 .flip:focus-visible .flip-inner, .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
 
