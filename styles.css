@@ -123,6 +123,25 @@ p { margin: 0; }
   background: linear-gradient(180deg, #fff 55%, #b9c7ff);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
+/* Headline variants: default is "NEUTOR" + cartoon tagline; ?title=network shows the original */
+.t-classic { display: none; }
+html.title-network .t-classic { display: inline; }
+html.title-network .t-new { display: none; }
+.hero-title .t-new { font-size: 1.22em; letter-spacing: -0.015em; }
+.hero-tagline {
+  margin-top: 14px; display: inline-block;
+  font-family: "Luckiest Guy", var(--display); font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.05; letter-spacing: .02em;
+  color: var(--cyan);
+  text-shadow: 3px 3px 0 var(--indigo), 6px 6px 0 rgba(0,0,0,.55);
+  transform: rotate(-3deg); transform-origin: left center;
+  animation: tagline-pop .9s cubic-bezier(.2,1.6,.4,1) .2s both;
+}
+@keyframes tagline-pop {
+  0% { opacity: 0; transform: rotate(-12deg) scale(.6); }
+  100% { opacity: 1; transform: rotate(-3deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } }
 .hero-lead { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 30ch; }
 .hero-lead strong { color: var(--ink); font-weight: 600; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
