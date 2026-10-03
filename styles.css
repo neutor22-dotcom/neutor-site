@@ -128,22 +128,43 @@ p { margin: 0; }
 html.title-network .t-classic { display: inline; }
 html.title-network .t-new { display: none; }
 .hero-title .t-new { font-size: 1.22em; letter-spacing: -0.015em; }
+.hero-lockup { display: inline-flex; flex-direction: column; align-items: center; }
 .hero-tagline {
-  margin-top: 14px; display: inline-block;
+  margin-top: 10px; display: block; text-align: center; white-space: nowrap;
   font-family: "Luckiest Guy", var(--display); font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.05; letter-spacing: .02em;
+  font-size: clamp(17px, 1.9vw, 27px); line-height: 1.1; letter-spacing: .04em;
   color: var(--cyan);
-  text-shadow: 3px 3px 0 var(--indigo), 6px 6px 0 rgba(0,0,0,.55);
-  transform: rotate(-3deg); transform-origin: left center;
-  animation: tagline-pop .9s cubic-bezier(.2,1.6,.4,1) .2s both;
+  text-shadow: 2px 2px 0 var(--indigo), 4px 4px 0 rgba(0,0,0,.5);
+  transform: rotate(-1.5deg);
+  animation: tagline-pop .8s cubic-bezier(.2,1.6,.4,1) .2s both;
 }
+html.title-network .hero-lockup { display: block; }
 @keyframes tagline-pop {
-  0% { opacity: 0; transform: rotate(-12deg) scale(.6); }
-  100% { opacity: 1; transform: rotate(-3deg) scale(1); }
+  0% { opacity: 0; transform: rotate(-6deg) scale(.7); }
+  100% { opacity: 1; transform: rotate(-1.5deg) scale(1); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } }
 .hero-lead { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 30ch; }
 .hero-lead strong { color: var(--ink); font-weight: 600; }
+.pitch-note {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; max-width: 46ch;
+  font-size: 14px; line-height: 1.5; color: var(--ink-3);
+}
+.info-i {
+  flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; margin-top: 1px;
+  border-radius: 50%; border: 1.5px solid var(--cyan); color: var(--cyan);
+  font: 800 12px/1 var(--display); font-style: italic;
+}
+.made-for {
+  display: inline-block; margin-left: 10px; padding: 3px 10px; border-radius: 999px; vertical-align: 1px;
+  background: rgba(1,255,255,.12); border: 1px solid rgba(1,255,255,.4);
+  font-size: 11px; letter-spacing: .1em; color: var(--cyan);
+}
+.apply-page { padding-top: calc(68px + clamp(48px, 7vw, 90px)); min-height: 100vh; }
+.apply-back { margin-top: 20px; }
+.apply-back a { color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 15px; }
+.apply-back a:hover { text-decoration: underline; }
+.nav-list a[aria-current="page"] { color: var(--cyan); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
 /* Stage: headsets + platform */
