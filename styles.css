@@ -648,3 +648,11 @@ main::before {
     radial-gradient(60% 600px at 70% 88%, rgba(63,0,255,.18), transparent 70%);
 }
 .scene-bg { -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); mask-image: linear-gradient(to bottom, #000 80%, transparent); }
+
+/* Hero specs: only once the headsets have landed on the platform */
+.stage .spec-badge { transition: opacity .3s ease, transform .3s ease; }
+.stage:not(.landed) .spec-badge { opacity: 0; transform: scale(.6); }
+.stage:not(.landed) .flip { pointer-events: none; }
+.stage:not(.landed) .flip-inner { transform: none !important; }
+.headset:hover, .headset:focus-within, .headset:has(.is-flipped) { z-index: 6; }
+.field[hidden] { display: none; }

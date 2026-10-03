@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Luckiest+Guy&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <!-- Headline style switch: add ?title=network to the URL for the original "NEUTOR Network" headline -->
   <script>if (/[?&]title=network\b/.test(location.search)) document.documentElement.classList.add("title-network");</script>
-  <link rel="stylesheet" href="styles.css?v=20261003c">
+  <link rel="stylesheet" href="styles.css?v=20261003d">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -63,14 +63,50 @@
           <div class="stage">
             <figure class="headset" data-headset="0">
               <div class="headset-body">
-                <img src="assets/quest-3.webp" width="392" height="294" alt="Meta Quest 3 headset." decoding="async" fetchpriority="high">
+                <div class="flip" tabindex="0">
+                  <div class="flip-inner">
+                    <div class="flip-front">
+                      <img src="assets/quest-3.webp" width="392" height="294" alt="Meta Quest 3 headset." decoding="async" fetchpriority="high">
+                      <span class="spec-badge" aria-hidden="true">i</span>
+                    </div>
+                    <div class="flip-back" aria-hidden="true">
+                      <p class="flip-title">Meta Quest 3</p>
+                      <dl class="spec">
+                        <div><dt>Display</dt><dd>2064 × 2208 / eye</dd></div>
+                        <div><dt>Lenses</dt><dd>Pancake</dd></div>
+                        <div><dt>Field of view</dt><dd>110° horizontal</dd></div>
+                        <div><dt>Chip</dt><dd>XR2 Gen 2 · 8GB</dd></div>
+                        <div><dt>Storage</dt><dd>512GB</dd></div>
+                      </dl>
+                      <p class="flip-why">30% more pixels and a wider view than 3S.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="headset-shadow" aria-hidden="true"></div>
               <figcaption class="headset-label">Meta Quest 3</figcaption>
             </figure>
             <figure class="headset" data-headset="1">
               <div class="headset-body">
-                <img src="assets/quest-3s.webp" width="407" height="284" alt="Meta Quest 3S headset." decoding="async">
+                <div class="flip" tabindex="0">
+                  <div class="flip-inner">
+                    <div class="flip-front">
+                      <img src="assets/quest-3s.webp" width="407" height="284" alt="Meta Quest 3S headset." decoding="async">
+                      <span class="spec-badge" aria-hidden="true">i</span>
+                    </div>
+                    <div class="flip-back" aria-hidden="true">
+                      <p class="flip-title">Meta Quest 3S</p>
+                      <dl class="spec">
+                        <div><dt>Display</dt><dd>1832 × 1920 / eye</dd></div>
+                        <div><dt>Lenses</dt><dd>Fresnel</dd></div>
+                        <div><dt>Field of view</dt><dd>96° horizontal</dd></div>
+                        <div><dt>Chip</dt><dd>XR2 Gen 2 · 8GB</dd></div>
+                        <div><dt>Storage</dt><dd>128GB / 256GB</dd></div>
+                      </dl>
+                      <p class="flip-why">Same chip as Quest 3 at a lower price.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="headset-shadow" aria-hidden="true"></div>
               <figcaption class="headset-label">Meta Quest 3S</figcaption>
@@ -327,11 +363,10 @@
           <li><a href="legal.html#terms">Terms of Use</a></li>
           <li><a href="legal.html">Legal</a></li>
         </ul>
-        <p class="footer-locale">United States</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js?v=20261003c" defer></script>
+  <script src="script.js?v=20261003d" defer></script>
 </body>
 </html>

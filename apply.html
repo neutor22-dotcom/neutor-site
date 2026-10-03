@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Luckiest+Guy&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <!-- Headline style switch: add ?title=network to the URL for the original "NEUTOR Network" headline -->
   <script>if (/[?&]title=network\b/.test(location.search)) document.documentElement.classList.add("title-network");</script>
-  <link rel="stylesheet" href="styles.css?v=20261003c">
+  <link rel="stylesheet" href="styles.css?v=20261003d">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -54,12 +54,13 @@
 
         <form class="apply-form" id="apply-form" novalidate method="post"
               action="https://docs.google.com/forms/d/e/FORM_PUBLIC_ID/formResponse">
-          <p class="form-note">About 4 minutes. Fields marked <span class="req">*</span> are required. Expect a reply within 5–7 business days.</p>
+          <p class="form-note">About 4 minutes. Fields marked <span class="req">*</span> are required.</p>
           <fieldset class="form-step">
             <legend class="step-title"><span class="step-num">1</span>About you <span class="step-sub">Who&#x27;s applying.</span></legend>
             <div class="field" data-label="Company or brand"><label for="ap-company">Company or brand <span class="req" aria-hidden="true">*</span></label><input id="ap-company" name="entry.PH_company" type="text" autocomplete="organization" required></div>
             <div class="field" data-label="Your name"><label for="ap-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="ap-name" name="entry.PH_name" type="text" autocomplete="name" required></div>
             <div class="field" data-label="Your role"><label for="ap-role">Your role <span class="req" aria-hidden="true">*</span></label><select id="ap-role" name="entry.PH_role" required><option value="">Choose one</option><option>Founder / CEO</option><option>Marketing manager</option><option>Influencer or creator partnerships</option><option>Community manager</option><option>Producer</option><option>Game developer</option><option>PR / communications</option><option>Agency account manager</option><option>Other</option></select></div>
+            <div class="field" data-label="State your role" data-show-when="ap-role=Other" hidden><label for="ap-role_other">State your role <span class="req" aria-hidden="true">*</span></label><input id="ap-role_other" name="entry.PH_role_other" type="text" autocomplete="organization-title"></div>
             <div class="field" data-label="Work email"><label for="ap-email">Work email <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-email-hint">A company email gets a faster reply.</p><input id="ap-email" name="entry.PH_email" type="email" autocomplete="email" required aria-describedby="ap-email-hint"></div>
             <div class="field" data-label="Company website"><label for="ap-website">Company website <span class="req" aria-hidden="true">*</span></label><input id="ap-website" name="entry.PH_website" type="text" autocomplete="url" placeholder="yourstudio.com" inputmode="url" data-url required></div>
             <div class="field" data-label="Company type"><label for="ap-ctype">Company type <span class="req" aria-hidden="true">*</span></label><select id="ap-ctype" name="entry.PH_ctype" required><option value="">Choose one</option><option>Game studio or developer</option><option>Game publisher</option><option>VR hardware or accessories</option><option>App or platform</option><option>Agency (representing a brand)</option><option>Other</option></select></div>
@@ -88,7 +89,7 @@
           <div class="hp" aria-hidden="true"><label for="ap-fax">Leave this empty</label><input id="ap-fax" name="fax" type="text" tabindex="-1" autocomplete="off"></div>
           <p class="form-error" id="apply-error" role="alert" hidden></p>
           <button class="btn btn-primary btn-lg" type="submit">Send application</button>
-          <p class="fine">Applications go straight to me and stay private. See the <a href="#privacy">privacy note</a>.</p>
+          <p class="fine">Applications go straight to me. I don't share them.</p>
         </form>
 
         <div class="apply-thanks" id="apply-thanks" tabindex="-1" hidden>
@@ -152,11 +153,10 @@
           <li><a href="legal.html#terms">Terms of Use</a></li>
           <li><a href="legal.html">Legal</a></li>
         </ul>
-        <p class="footer-locale">United States</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js?v=20261003c" defer></script>
+  <script src="script.js?v=20261003d" defer></script>
 </body>
 </html>

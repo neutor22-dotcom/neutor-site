@@ -161,6 +161,21 @@
       thanks.focus();
     };
 
+    // Fields that only appear for one answer, e.g. "State your role" when Role is "Other"
+    applyForm.querySelectorAll("[data-show-when]").forEach((field) => {
+      const [id, value] = field.dataset.showWhen.split("=");
+      const trigger = document.getElementById(id);
+      const input = field.querySelector("input, textarea, select");
+      const sync = () => {
+        const show = trigger.value === value;
+        field.hidden = !show;
+        input.required = show;
+        if (!show) { input.value = ""; input.removeAttribute("aria-invalid"); }
+      };
+      trigger.addEventListener("change", () => { sync(); if (!field.hidden) input.focus(); });
+      sync();
+    });
+
     function validate() {
       let firstBad = null;
       applyForm.querySelectorAll("input:not([type=checkbox]):not([name=fax]), textarea, select").forEach((el) => {
@@ -180,7 +195,7 @@
 
     function asEmail() {
       const lines = [];
-      applyForm.querySelectorAll(".form-step [data-label]").forEach((field) => {
+      applyForm.querySelectorAll(".form-step [data-label]:not([hidden])").forEach((field) => {
         const values = [...field.querySelectorAll("input, textarea, select")]
           .filter((el) => (el.type === "checkbox" ? el.checked : el.value))
           .map((el) => el.value);
@@ -237,7 +252,11 @@
     tilt: i === 0 ? -7 : 7,
   }));
 
-  const setLanded = (on) => stage.classList.toggle("landed", on);
+  const setLanded = (on) => {
+    stage.classList.toggle("landed", on);
+    // lifting off again closes any open spec card
+    if (!on) stage.querySelectorAll(".flip.is-flipped").forEach((c) => c.classList.remove("is-flipped"));
+  };
 
   if (reduceMotion) { setLanded(true); return; }
 
