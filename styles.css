@@ -160,6 +160,10 @@ html.title-network .hero-lockup { display: block; }
   background: rgba(1,255,255,.12); border: 1px solid rgba(1,255,255,.4);
   font-size: 11px; letter-spacing: .1em; color: var(--cyan);
 }
+.meta-intro { padding-top: calc(68px + clamp(48px, 7vw, 90px)); padding-bottom: 0; }
+.meta-back { margin-top: 20px; }
+.meta-back a { color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 15px; }
+.meta-back a:hover { text-decoration: underline; }
 .apply-page { padding-top: calc(68px + clamp(48px, 7vw, 90px)); min-height: 100vh; }
 .apply-back { margin-top: 20px; }
 .apply-back a { color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 15px; }
