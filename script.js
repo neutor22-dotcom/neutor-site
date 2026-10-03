@@ -2,6 +2,30 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
+  /* ---------- Hero: stretch the tagline to the exact width of NEUTOR ---------- */
+  const tagWord = document.querySelector(".hero-title .t-new");
+  const tagline = document.querySelector(".hero-tagline");
+  if (tagWord && tagline) {
+    const fitTagline = () => {
+      tagline.style.fontSize = "";
+      tagline.style.width = "max-content"; // measure the text, not the stretched box
+      const target = tagWord.getBoundingClientRect().width;
+      const current = tagline.getBoundingClientRect().width;
+      tagline.style.width = "";
+      if (target && current) {
+        const size = parseFloat(getComputedStyle(tagline).fontSize) * (target / current);
+        tagline.style.fontSize = size.toFixed(1) + "px";
+      }
+    };
+    fitTagline();
+    if (document.fonts) {
+      document.fonts.ready.then(fitTagline);
+      document.fonts.addEventListener("loadingdone", fitTagline);
+    }
+    window.addEventListener("load", fitTagline);
+    window.addEventListener("resize", fitTagline);
+  }
+
   /* ---------- Count-up numbers ---------- */
   const formatters = {
     int: (v) => Math.round(v).toLocaleString("en-US"),
