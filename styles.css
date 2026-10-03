@@ -635,3 +635,16 @@ body {
 .scene + .section { padding-top: clamp(40px, 6vw, 80px); }
 .site-footer { background: transparent; border-top: 1px solid rgba(255,255,255,.06); }
 .scene-bg { -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
+
+/* Carry the hero's color down the page instead of dropping to flat black */
+main { position: relative; isolation: isolate; }
+main::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(55% 900px at 85% 30%, rgba(0,108,255,.20), transparent 70%),
+    radial-gradient(50% 900px at 10% 45%, rgba(63,0,255,.20), transparent 70%),
+    radial-gradient(55% 900px at 90% 62%, rgba(210,0,255,.12), transparent 70%),
+    radial-gradient(50% 900px at 15% 80%, rgba(0,108,255,.18), transparent 70%),
+    radial-gradient(60% 600px at 70% 88%, rgba(63,0,255,.18), transparent 70%);
+}
+.scene-bg { -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); mask-image: linear-gradient(to bottom, #000 80%, transparent); }
