@@ -575,3 +575,7 @@ html.title-network .hero-lockup { display: block; }
   .spec-badge { animation: none; }
   .flip-hint { opacity: 1; transition: none; }
 }
+.footer-inner p { max-width: 90ch; line-height: 1.55; }
+.footer-inner strong { color: var(--ink-2); font-weight: 600; }
+.footer-inner a { color: var(--ink-2); }
+.footer-brand { color: var(--ink-2); }
