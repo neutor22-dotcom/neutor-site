@@ -124,33 +124,73 @@
   if (applyForm) {
     const errorEl = document.getElementById("apply-error");
     const thanks = document.getElementById("apply-thanks");
+    const thanksText = document.getElementById("apply-thanks-text");
     const button = applyForm.querySelector('button[type="submit"]');
+    // Until the Google Form IDs are filled in, applications go out as a prefilled email instead
+    const formReady = !applyForm.action.includes("FORM_PUBLIC_ID");
+    const fallbackEmail = "neutor22@gmail.com";
     const showError = (msg) => { errorEl.textContent = msg; errorEl.hidden = false; };
+    const showThanks = (msg) => {
+      if (msg) thanksText.textContent = msg;
+      applyForm.hidden = true;
+      thanks.hidden = false;
+      thanks.focus();
+    };
+
+    function validate() {
+      let firstBad = null;
+      applyForm.querySelectorAll("input:not([type=checkbox]):not([name=fax]), textarea, select").forEach((el) => {
+        el.value = el.value.trim();
+        if (el.hasAttribute("data-url") && el.value && !/^https?:\/\//i.test(el.value)) el.value = "https://" + el.value;
+        const bad = !el.checkValidity() || (el.hasAttribute("data-url") && el.value && !/^https?:\/\/[^\s.]+\.[^\s]+$/i.test(el.value));
+        el.setAttribute("aria-invalid", bad ? "true" : "false");
+        if (bad && !firstBad) firstBad = el;
+      });
+      applyForm.querySelectorAll("[data-group][data-required]").forEach((group) => {
+        const bad = !group.querySelector("input:checked");
+        group.setAttribute("aria-invalid", bad ? "true" : "false");
+        if (bad && !firstBad) firstBad = group.querySelector("input");
+      });
+      return firstBad;
+    }
+
+    function asEmail() {
+      const lines = [];
+      applyForm.querySelectorAll(".form-step [data-label]").forEach((field) => {
+        const values = [...field.querySelectorAll("input, textarea, select")]
+          .filter((el) => (el.type === "checkbox" ? el.checked : el.value))
+          .map((el) => el.value);
+        lines.push(field.dataset.label + ": " + (values.join(", ") || "-"));
+      });
+      const company = applyForm.querySelector("#ap-company").value;
+      return "mailto:" + fallbackEmail +
+        "?subject=" + encodeURIComponent("Sponsorship application: " + company) +
+        "&body=" + encodeURIComponent(lines.join("\n\n"));
+    }
 
     applyForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       errorEl.hidden = true;
-      let firstBad = null;
-      applyForm.querySelectorAll("input, textarea, select").forEach((el) => {
-        if (el.type === "checkbox") return;
-        el.value = el.value.trim();
-        const bad = !el.checkValidity();
-        el.setAttribute("aria-invalid", bad ? "true" : "false");
-        if (bad && !firstBad) firstBad = el;
-      });
+      const firstBad = validate();
       if (firstBad) {
-        showError("Please fill in the required fields and check your email address.");
+        showError("Please fill in the highlighted fields.");
         firstBad.focus();
+        return;
+      }
+      if (applyForm.elements.fax.value) { showThanks(); return; } // bot filled the hidden trap field
+      if (!formReady) {
+        window.location.href = asEmail();
+        showThanks("Your email app should open with your application filled in. Press send there and it reaches me. If nothing opened, email " + fallbackEmail + ".");
         return;
       }
       button.disabled = true;
       button.textContent = "Sending…";
       try {
         // Google Forms sends no CORS headers, so the response is opaque; reaching it counts as sent
-        await fetch(applyForm.action, { method: "POST", mode: "no-cors", body: new FormData(applyForm) });
-        applyForm.hidden = true;
-        thanks.hidden = false;
-        thanks.focus();
+        const data = new FormData(applyForm);
+        data.delete("fax");
+        await fetch(applyForm.action, { method: "POST", mode: "no-cors", body: data });
+        showThanks();
       } catch (err) {
         showError("That didn't send. Check your connection and try again.");
         button.disabled = false;

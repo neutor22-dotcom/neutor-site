@@ -395,7 +395,7 @@
         <div class="apply-intro">
           <p class="eyebrow">Brands, studios, game devs</p>
           <h2 id="apply-title" class="section-title">Apply to sponsor</h2>
-          <p class="section-lead">Tell me about your game, headset or product. I read every application and reply to the ones that fit my channels.</p>
+          <p class="section-lead">Tell me about your game, headset or product. I read every application and reply to the ones that fit my channels and my audience.</p>
           <ul class="apply-points">
             <li>Integrated segments, dedicated videos and Shorts</li>
             <li>Review units and early access builds</li>
@@ -405,56 +405,39 @@
 
         <form class="apply-form" id="apply-form" novalidate method="post"
               action="https://docs.google.com/forms/d/e/FORM_PUBLIC_ID/formResponse">
-          <div class="field-row">
-            <div class="field">
-              <label for="ap-company">Company or brand <span class="req" aria-hidden="true">*</span></label>
-              <input id="ap-company" name="entry.COMPANY" type="text" autocomplete="organization" required>
-            </div>
-            <div class="field">
-              <label for="ap-name">Your name <span class="req" aria-hidden="true">*</span></label>
-              <input id="ap-name" name="entry.NAME" type="text" autocomplete="name" required>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="ap-email">Contact email <span class="req" aria-hidden="true">*</span></label>
-              <input id="ap-email" name="entry.EMAIL" type="email" autocomplete="email" required>
-            </div>
-            <div class="field">
-              <label for="ap-site">Website <span class="opt">(optional)</span></label>
-              <input id="ap-site" name="entry.WEBSITE" type="url" inputmode="url" autocomplete="url" placeholder="https://">
-            </div>
-          </div>
-          <div class="field">
-            <label for="ap-what">What are you promoting? <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="ap-what" name="entry.PROMOTING" rows="3" required></textarea>
-          </div>
-          <fieldset class="field">
-            <legend>Which channels?</legend>
-            <div class="checks">
-              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTORR+ (UG VR)"><span>NEUTORR+ <small>UG VR</small></span></label>
-              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTORX (Hero X Hero)"><span>NEUTORX <small>Hero X Hero</small></span></label>
-              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTOR THE MONKE (Animal Company)"><span>NEUTOR THE MONKE <small>Animal Company</small></span></label>
-              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="NEUTOR (Gorilla Tag)"><span>NEUTOR <small>Gorilla Tag</small></span></label>
-              <label class="check"><input type="checkbox" name="entry.CHANNELS" value="Not sure yet"><span>Not sure yet</span></label>
-            </div>
+          <p class="form-note">About 4 minutes. Fields marked <span class="req">*</span> are required.</p>
+          <fieldset class="form-step">
+            <legend class="step-title"><span class="step-num">1</span>About you <span class="step-sub">Who&#x27;s applying.</span></legend>
+            <div class="field" data-label="Company or brand"><label for="ap-company">Company or brand <span class="req" aria-hidden="true">*</span></label><input id="ap-company" name="entry.PH_company" type="text" autocomplete="organization" required></div>
+            <div class="field" data-label="Your name"><label for="ap-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="ap-name" name="entry.PH_name" type="text" autocomplete="name" required></div>
+            <div class="field" data-label="Your role"><label for="ap-role">Your role <span class="req" aria-hidden="true">*</span></label><input id="ap-role" name="entry.PH_role" type="text" autocomplete="organization-title" placeholder="e.g. Marketing lead, Founder" required></div>
+            <div class="field" data-label="Work email"><label for="ap-email">Work email <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-email-hint">A company email gets a faster reply.</p><input id="ap-email" name="entry.PH_email" type="email" autocomplete="email" required aria-describedby="ap-email-hint"></div>
+            <div class="field" data-label="Company website"><label for="ap-website">Company website <span class="req" aria-hidden="true">*</span></label><input id="ap-website" name="entry.PH_website" type="text" autocomplete="url" placeholder="yourstudio.com" inputmode="url" data-url required></div>
+            <div class="field" data-label="Company type"><label for="ap-ctype">Company type <span class="req" aria-hidden="true">*</span></label><select id="ap-ctype" name="entry.PH_ctype" required><option value="">Choose one</option><option>Game studio or developer</option><option>Game publisher</option><option>VR hardware or accessories</option><option>App or platform</option><option>Agency (representing a brand)</option><option>Other</option></select></div>
+            <div class="field" data-label="If you&#x27;re an agency, which brand is this for?"><label for="ap-agency">If you&#x27;re an agency, which brand is this for? <span class="opt">(optional)</span></label><input id="ap-agency" name="entry.PH_agency" type="text"></div>
           </fieldset>
-          <div class="field">
-            <label for="ap-budget">Budget (USD)</label>
-            <select id="ap-budget" name="entry.BUDGET">
-              <option value="">Choose one</option>
-              <option>Under $500</option>
-              <option>$500-$1,000</option>
-              <option>$1,000-$2,500</option>
-              <option>$2,500-$5,000</option>
-              <option>$5,000+</option>
-              <option>Product / review unit only</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="ap-notes">Timeline and anything else</label>
-            <textarea id="ap-notes" name="entry.NOTES" rows="3"></textarea>
-          </div>
+          <fieldset class="form-step">
+            <legend class="step-title"><span class="step-num">2</span>Your campaign <span class="step-sub">What you want made.</span></legend>
+            <div class="field" data-label="What are you promoting?"><label for="ap-product">What are you promoting? <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-product-hint">Name, a one-line pitch and a link (store page, trailer or site).</p><textarea id="ap-product" name="entry.PH_product" rows="3" required aria-describedby="ap-product-hint"></textarea></div>
+            <div class="field" data-label="Product status"><label for="ap-status">Product status <span class="req" aria-hidden="true">*</span></label><select id="ap-status" name="entry.PH_status" required><option value="">Choose one</option><option>Out now</option><option>Early access</option><option>Launching within 3 months</option><option>In development (no date yet)</option></select></div>
+            <fieldset class="field" data-group data-required data-label="Platforms"><legend>Platforms <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.PH_platforms" value="Meta Quest (standalone)"><span>Meta Quest (standalone)</span></label><label class="check"><input type="checkbox" name="entry.PH_platforms" value="PC VR (Steam)"><span>PC VR (Steam)</span></label><label class="check"><input type="checkbox" name="entry.PH_platforms" value="PlayStation VR2"><span>PlayStation VR2</span></label><label class="check"><input type="checkbox" name="entry.PH_platforms" value="Apple Vision Pro"><span>Apple Vision Pro</span></label><label class="check"><input type="checkbox" name="entry.PH_platforms" value="Not a VR product"><span>Not a VR product</span></label></div></fieldset>
+            <fieldset class="field" data-group data-required data-label="Main goal"><legend>Main goal <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.PH_goal" value="Downloads or installs"><span>Downloads or installs</span></label><label class="check"><input type="checkbox" name="entry.PH_goal" value="Wishlists or pre-orders"><span>Wishlists or pre-orders</span></label><label class="check"><input type="checkbox" name="entry.PH_goal" value="Sales"><span>Sales</span></label><label class="check"><input type="checkbox" name="entry.PH_goal" value="Launch awareness"><span>Launch awareness</span></label><label class="check"><input type="checkbox" name="entry.PH_goal" value="Community or Discord growth"><span>Community or Discord growth</span></label></div></fieldset>
+            <fieldset class="field" data-group data-required data-label="What would you like?"><legend>What would you like? <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="Dedicated video"><span>Dedicated video</span></label><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="Integrated segment (60-90 sec)"><span>Integrated segment (60-90 sec)</span></label><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="YouTube Shorts"><span>YouTube Shorts</span></label><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="Livestream"><span>Livestream</span></label><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="Honest review"><span>Honest review</span></label><label class="check"><input type="checkbox" name="entry.PH_deliverables" value="Recommend what works best"><span>Recommend what works best</span></label></div></fieldset>
+            <fieldset class="field" data-group data-required data-label="Which channels?"><legend>Which channels? <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.PH_channels" value="NEUTORR+ (UG VR)"><span>NEUTORR+ (UG VR)</span></label><label class="check"><input type="checkbox" name="entry.PH_channels" value="NEUTORX (Hero X Hero)"><span>NEUTORX (Hero X Hero)</span></label><label class="check"><input type="checkbox" name="entry.PH_channels" value="NEUTOR THE MONKE (Animal Company)"><span>NEUTOR THE MONKE (Animal Company)</span></label><label class="check"><input type="checkbox" name="entry.PH_channels" value="NEUTOR (Gorilla Tag)"><span>NEUTOR (Gorilla Tag)</span></label><label class="check"><input type="checkbox" name="entry.PH_channels" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
+            <div class="field" data-label="Why my channels?"><label for="ap-why">Why my channels? <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-why-hint">Which of my videos made you think of me, and why does my audience fit?</p><textarea id="ap-why" name="entry.PH_why" rows="3" required aria-describedby="ap-why-hint"></textarea></div>
+          </fieldset>
+          <fieldset class="form-step">
+            <legend class="step-title"><span class="step-num">3</span>Budget and timing <span class="step-sub">So I can tell quickly if we&#x27;re a match.</span></legend>
+            <div class="field" data-label="Budget (USD)"><label for="ap-budget">Budget (USD) <span class="req" aria-hidden="true">*</span></label><select id="ap-budget" name="entry.PH_budget" required><option value="">Choose one</option><option>Under $500</option><option>$500-$1,000</option><option>$1,000-$2,500</option><option>$2,500-$5,000</option><option>$5,000+</option><option>Product / review unit only</option></select></div>
+            <div class="field" data-label="Compensation type"><label for="ap-comp">Compensation type <span class="req" aria-hidden="true">*</span></label><select id="ap-comp" name="entry.PH_comp" required><option value="">Choose one</option><option>Flat fee</option><option>Flat fee + product</option><option>Product or keys only</option><option>Affiliate / revenue share only</option><option>Open to discussing</option></select></div>
+            <div class="field" data-label="When should it go live?"><label for="ap-timeline">When should it go live? <span class="req" aria-hidden="true">*</span></label><select id="ap-timeline" name="entry.PH_timeline" required><option value="">Choose one</option><option>Within 2 weeks</option><option>This month</option><option>In 1-3 months</option><option>Flexible</option></select></div>
+            <div class="field" data-label="Creative control"><label for="ap-control">Creative control <span class="req" aria-hidden="true">*</span></label><select id="ap-control" name="entry.PH_control" required><option value="">Choose one</option><option>Your key points, my style</option><option>Approval before publishing</option><option>Strict brief or provided script</option></select></div>
+            <div class="field" data-label="Will you run the video as a paid ad?"><label for="ap-usage">Will you run the video as a paid ad? <span class="req" aria-hidden="true">*</span></label><select id="ap-usage" name="entry.PH_usage" required><option value="">Choose one</option><option>No, organic only</option><option>Yes, we want ad usage rights</option><option>Not sure yet</option></select></div>
+            <div class="field" data-label="How did you find me?"><label for="ap-source">How did you find me? <span class="opt">(optional)</span></label><select id="ap-source" name="entry.PH_source"><option value="">Choose one</option><option>YouTube</option><option>Search</option><option>Referral</option><option>Creator database or agency</option><option>Other</option></select></div>
+            <div class="field" data-label="Anything else"><label for="ap-notes">Anything else <span class="opt">(optional)</span></label><textarea id="ap-notes" name="entry.PH_notes" rows="3"></textarea></div>
+            <fieldset class="field" data-group data-required data-label="Audience check"><legend>Audience check <span class="req" aria-hidden="true">*</span></legend><div class="checks checks-wide"><label class="check"><input type="checkbox" name="entry.PH_safe" value="My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content."><span>My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content.</span></label></div></fieldset>
+          </fieldset>
+          <div class="hp" aria-hidden="true"><label for="ap-fax">Leave this empty</label><input id="ap-fax" name="fax" type="text" tabindex="-1" autocomplete="off"></div>
           <p class="form-error" id="apply-error" role="alert" hidden></p>
           <button class="btn btn-primary btn-lg" type="submit">Send application</button>
           <p class="fine">Applications go straight to me. I don't share them.</p>
@@ -462,7 +445,7 @@
 
         <div class="apply-thanks" id="apply-thanks" tabindex="-1" hidden>
           <h3>Application sent</h3>
-          <p>Thanks! I'll read it and get back to you by email if it's a fit.</p>
+          <p id="apply-thanks-text">Thanks! I'll read it and get back to you by email if it's a fit.</p>
         </div>
       </div>
     </section>

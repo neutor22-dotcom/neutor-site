@@ -430,7 +430,8 @@ html.title-network .t-new { display: none; }
 /* Contact */
 /* ---------- Apply to sponsor ---------- */
 .apply { background: radial-gradient(60% 80% at 15% 30%, rgba(63,0,255,.22), transparent 70%), var(--bg-2); border-top: 1px solid var(--line); }
-.apply-inner { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: start; }
+.apply-inner { position: relative; display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: start; }
+.apply-intro { position: sticky; top: 100px; }
 .apply-intro .section-lead { margin-top: 18px; }
 .apply-points { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; color: var(--ink-2); }
 .apply-points li { position: relative; padding-left: 28px; }
@@ -467,6 +468,18 @@ html.title-network .t-new { display: none; }
 .check input:checked + span { border-color: var(--cyan); color: #000; background: var(--cyan); }
 .check input:checked + span small { color: rgba(0,0,0,.65); }
 .check input:focus-visible + span { outline: 3px solid var(--cyan); outline-offset: 3px; }
+.form-note { color: var(--ink-3); font-size: 14px; }
+.form-step { border: 0; margin: 0; padding: 0; display: grid; gap: 18px; min-width: 0; }
+.form-step:not(:last-of-type) { border-bottom: 1px solid var(--line); padding-bottom: 26px; margin-bottom: 6px; }
+.step-title { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; padding: 0; margin-bottom: 4px;
+  font-family: var(--display); font-weight: 900; font-size: 22px; color: var(--ink); }
+.step-num { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cyan); color: #000; font-size: 16px; }
+.step-sub { width: 100%; font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--ink-3); }
+.hint { color: var(--ink-3); font-size: 14px; margin-top: -2px; }
+.checks-wide .check span { border-radius: 14px; line-height: 1.4; }
+.field[data-group][aria-invalid="true"] .check span { border-color: #ff5c7a; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-error { color: #ff8da1; font-weight: 600; }
 .apply-form .btn { justify-self: start; border: 0; cursor: pointer; }
 .apply-form .btn[disabled] { opacity: .6; cursor: progress; }
@@ -476,6 +489,7 @@ html.title-network .t-new { display: none; }
 @media (max-width: 860px) {
   .apply-inner { grid-template-columns: 1fr; gap: 36px; }
   .field-row { grid-template-columns: 1fr; }
+  .apply-intro { position: static; }
 }
 
 .contact { background: radial-gradient(70% 90% at 80% 50%, rgba(0,108,255,.28), transparent 70%), var(--bg); border-top: 1px solid var(--line); }
