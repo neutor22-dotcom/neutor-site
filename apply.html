@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Luckiest+Guy&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <!-- Headline style switch: add ?title=network to the URL for the original "NEUTOR Network" headline -->
   <script>if (/[?&]title=network\b/.test(location.search)) document.documentElement.classList.add("title-network");</script>
-  <link rel="stylesheet" href="styles.css?v=20261005a">
+  <link rel="stylesheet" href="styles.css?v=20261007a">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -37,65 +37,103 @@
   </header>
 
   <main id="main">
-    <!-- Sponsor application: posts to a Google Form; responses land in a private sheet -->
-    <section class="section apply apply-page" id="apply" aria-labelledby="apply-title">
-      <div class="wrap apply-inner">
-        <div class="apply-intro">
-          <p class="eyebrow">Brands, studios, game devs</p>
-          <h1 id="apply-title" class="section-title">Apply to sponsor</h1>
-          <p class="section-lead">Tell me about your game, headset or product. I read every application and reply to the ones that fit my channels and my audience. Please allow 5–7 business days for a reply, though I usually get back sooner.</p>
-          <p class="apply-back"><a href="index.html">← Back to my channels and stats</a></p>
-          <ul class="apply-points">
-            <li>Integrated segments, dedicated videos and Shorts</li>
-            <li>Review units and early access builds</li>
-            <li>Four VR channels, one audience that plays</li>
-          </ul>
+    <!-- Sponsor application: one short step at a time, posts to a Google Form; responses land in a private sheet -->
+    <section class="apply-flow" id="apply" aria-labelledby="apply-title">
+      <div class="flow-wrap">
+        <div class="flow-top">
+          <h1 id="apply-title" class="flow-kicker">Apply to sponsor</h1>
+          <p class="flow-count" id="flow-count" aria-live="polite">Step 1 of 6</p>
         </div>
+        <div class="flow-bar" role="progressbar" aria-label="Application progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1"><span id="flow-bar-fill"></span></div>
 
-        <form class="apply-form" id="apply-form" novalidate method="post"
+        <form class="flow-card" id="apply-form" novalidate method="post"
               action="https://docs.google.com/forms/d/e/1FAIpQLSc5UN7tvf0i0PRQWKR-UboSu9qowMDivx8zA_2ZG1E1q_hohA/formResponse">
-          <p class="form-note">About 4 minutes. Fields marked <span class="req">*</span> are required.</p>
-          <fieldset class="form-step">
-            <legend class="step-title"><span class="step-num">1</span>About you <span class="step-sub">Who&#x27;s applying.</span></legend>
-            <div class="field" data-label="Company or brand"><label for="ap-company">Company or brand <span class="req" aria-hidden="true">*</span></label><input id="ap-company" name="entry.1214005019" type="text" autocomplete="organization" required></div>
-            <div class="field" data-label="Your name"><label for="ap-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="ap-name" name="entry.1010700507" type="text" autocomplete="name" required></div>
-            <div class="field" data-label="Your role"><label for="ap-role">Your role <span class="req" aria-hidden="true">*</span></label><select id="ap-role" name="entry.601054041" required><option value="">Choose one</option><option>Founder / CEO</option><option>Marketing manager</option><option>Influencer or creator partnerships</option><option>Community manager</option><option>Producer</option><option>Game developer</option><option>PR / communications</option><option>Agency account manager</option><option>Other</option></select></div>
-            <div class="field" data-label="State your role" data-show-when="ap-role=Other" hidden><label for="ap-role_other">State your role <span class="req" aria-hidden="true">*</span></label><input id="ap-role_other" name="entry.1299603288" type="text" autocomplete="organization-title"></div>
-            <div class="field" data-label="Work email"><label for="ap-email">Work email <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-email-hint">A company email gets a faster reply.</p><input id="ap-email" name="entry.231511342" type="email" autocomplete="email" required aria-describedby="ap-email-hint"></div>
-            <div class="field" data-label="Company website"><label for="ap-website">Company website <span class="req" aria-hidden="true">*</span></label><input id="ap-website" name="entry.1244314649" type="text" autocomplete="url" placeholder="yourstudio.com" inputmode="url" data-url required></div>
-            <div class="field" data-label="Company type"><label for="ap-ctype">Company type <span class="req" aria-hidden="true">*</span></label><select id="ap-ctype" name="entry.444075466" required><option value="">Choose one</option><option>Game studio or developer</option><option>Game publisher</option><option>VR hardware or accessories</option><option>App or platform</option><option>Agency (representing a brand)</option><option>Other</option></select></div>
-            <div class="field" data-label="If you&#x27;re an agency, which brand is this for?"><label for="ap-agency">If you&#x27;re an agency, which brand is this for? <span class="opt">(optional)</span></label><input id="ap-agency" name="entry.1754800429" type="text"></div>
+
+          <fieldset class="flow-step" data-step="1">
+            <legend class="flow-q" tabindex="-1">First, who's applying?</legend>
+            <div class="field"><label for="ap-name">Your name</label><input id="ap-name" name="entry.1010700507" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="ap-company">Company or brand</label><input id="ap-company" name="entry.1214005019" type="text" autocomplete="organization" required></div>
           </fieldset>
-          <fieldset class="form-step">
-            <legend class="step-title"><span class="step-num">2</span>Your campaign <span class="step-sub">What you want made.</span></legend>
-            <div class="field" data-label="What are you promoting?"><label for="ap-product">What are you promoting? <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-product-hint">Name, a one-line pitch and a link (store page, trailer or site).</p><textarea id="ap-product" name="entry.1814895676" rows="3" required aria-describedby="ap-product-hint"></textarea></div>
-            <div class="field" data-label="Product status"><label for="ap-status">Product status <span class="req" aria-hidden="true">*</span></label><select id="ap-status" name="entry.381301034" required><option value="">Choose one</option><option>Out now</option><option>Early access</option><option>Launching within 3 months</option><option>In development (no date yet)</option></select></div>
-            <div class="field" data-label="Does it work on Meta Quest 3 / 3S?"><label for="ap-quest">Does it work on Meta Quest 3 / 3S? <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-quest-hint">I only play and record on Meta Quest 3 and 3S.</p><select id="ap-quest" name="entry.1815877606" required aria-describedby="ap-quest-hint"><option value="">Choose one</option><option>Yes, it&#x27;s on Quest 3 / 3S now</option><option>Coming to Quest 3 / 3S soon</option><option>No</option></select></div>
-            <fieldset class="field" data-group data-required data-label="Main goal"><legend>Main goal <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.1163276605" value="Downloads or installs"><span>Downloads or installs</span></label><label class="check"><input type="checkbox" name="entry.1163276605" value="Wishlists or pre-orders"><span>Wishlists or pre-orders</span></label><label class="check"><input type="checkbox" name="entry.1163276605" value="Sales"><span>Sales</span></label><label class="check"><input type="checkbox" name="entry.1163276605" value="Launch awareness"><span>Launch awareness</span></label><label class="check"><input type="checkbox" name="entry.1163276605" value="Community or Discord growth"><span>Community or Discord growth</span></label></div></fieldset>
-            <fieldset class="field" data-group data-required data-label="What would you like?"><legend>What would you like? <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.1456612724" value="Dedicated video"><span>Dedicated video</span></label><label class="check"><input type="checkbox" name="entry.1456612724" value="Integrated segment (60-90 sec)"><span>Integrated segment (60-90 sec)</span></label><label class="check"><input type="checkbox" name="entry.1456612724" value="YouTube Shorts"><span>YouTube Shorts</span></label><label class="check"><input type="checkbox" name="entry.1456612724" value="Livestream"><span>Livestream</span></label><label class="check"><input type="checkbox" name="entry.1456612724" value="Honest review"><span>Honest review</span></label><label class="check"><input type="checkbox" name="entry.1456612724" value="Recommend what works best"><span>Recommend what works best</span></label></div></fieldset>
-            <fieldset class="field" data-group data-required data-label="Which channels?"><legend>Which channels? <span class="req" aria-hidden="true">*</span></legend><div class="checks"><label class="check"><input type="checkbox" name="entry.235913092" value="NEUTORR+ (UG VR)"><span>NEUTORR+ (UG VR)</span></label><label class="check"><input type="checkbox" name="entry.235913092" value="NEUTORX (Hero X Hero)"><span>NEUTORX (Hero X Hero)</span></label><label class="check"><input type="checkbox" name="entry.235913092" value="NEUTOR THE MONKE (Animal Company)"><span>NEUTOR THE MONKE (Animal Company)</span></label><label class="check"><input type="checkbox" name="entry.235913092" value="NEUTOR (Gorilla Tag)"><span>NEUTOR (Gorilla Tag)</span></label><label class="check"><input type="checkbox" name="entry.235913092" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
-            <div class="field" data-label="Why my channels?"><label for="ap-why">Why my channels? <span class="req" aria-hidden="true">*</span></label><p class="hint" id="ap-why-hint">Which of my videos made you think of me, and why does my audience fit?</p><textarea id="ap-why" name="entry.150976617" rows="3" required aria-describedby="ap-why-hint"></textarea></div>
+
+          <fieldset class="flow-step" data-step="2" hidden>
+            <legend class="flow-q" tabindex="-1">Where can I reach you?</legend>
+            <div class="field"><label for="ap-email">Work email</label><p class="hint" id="ap-email-hint">A company email gets a faster reply.</p><input id="ap-email" name="entry.231511342" type="email" autocomplete="email" required aria-describedby="ap-email-hint"></div>
+            <div class="field"><label for="ap-website">Company website</label><input id="ap-website" name="entry.1244314649" type="text" autocomplete="url" placeholder="yourstudio.com" inputmode="url" data-url required></div>
           </fieldset>
-          <fieldset class="form-step">
-            <legend class="step-title"><span class="step-num">3</span>Deal and timing <span class="step-sub">I&#x27;ll send my rate after I review your application.</span></legend>
-            <div class="field" data-label="What kind of deal are you offering?"><label for="ap-comp">What kind of deal are you offering? <span class="req" aria-hidden="true">*</span></label><select id="ap-comp" name="entry.1962949812" required><option value="">Choose one</option><option>Paid sponsorship</option><option>Paid sponsorship + product or keys</option><option>Product or keys only</option><option>Affiliate / revenue share only</option></select></div>
-            <div class="field" data-label="When should it go live?"><label for="ap-timeline">When should it go live? <span class="req" aria-hidden="true">*</span></label><select id="ap-timeline" name="entry.1251506500" required><option value="">Choose one</option><option>Within 2 weeks</option><option>This month</option><option>In 1-3 months</option><option>Flexible</option></select></div>
-            <div class="field" data-label="Creative control"><label for="ap-control">Creative control <span class="req" aria-hidden="true">*</span></label><select id="ap-control" name="entry.842337916" required><option value="">Choose one</option><option>Your key points, my style</option><option>Approval before publishing</option><option>Strict brief or provided script</option></select></div>
-            <div class="field" data-label="Will you run the video as a paid ad?"><label for="ap-usage">Will you run the video as a paid ad? <span class="req" aria-hidden="true">*</span></label><select id="ap-usage" name="entry.763475420" required><option value="">Choose one</option><option>No, organic only</option><option>Yes, we want ad usage rights</option><option>Not sure yet</option></select></div>
-            <div class="field" data-label="How did you find me?"><label for="ap-source">How did you find me? <span class="opt">(optional)</span></label><select id="ap-source" name="entry.1340080337"><option value="">Choose one</option><option>YouTube</option><option>Search</option><option>Referral</option><option>Creator database or agency</option><option>Other</option></select></div>
-            <div class="field" data-label="Anything else"><label for="ap-notes">Anything else <span class="opt">(optional)</span></label><textarea id="ap-notes" name="entry.634817505" rows="3"></textarea></div>
-            <fieldset class="field" data-group data-required data-label="Audience check"><legend>Audience check <span class="req" aria-hidden="true">*</span></legend><div class="checks checks-wide"><label class="check"><input type="checkbox" name="entry.1164209588" value="My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content."><span>My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content.</span></label></div></fieldset>
+
+          <fieldset class="flow-step" data-step="3" hidden>
+            <legend class="flow-q" tabindex="-1">What are you promoting?</legend>
+            <div class="field"><label for="ap-product">Game, headset or product</label><p class="hint" id="ap-product-hint">Its name, a one-line pitch and a link to the store page or trailer.</p><textarea id="ap-product" name="entry.1814895676" rows="3" required aria-describedby="ap-product-hint"></textarea></div>
+            <fieldset class="field" data-group data-required><legend>Does it run on Meta Quest 3 / 3S?</legend>
+              <div class="checks">
+                <label class="check"><input type="radio" name="entry.1815877606" value="Yes, it's on Quest 3 / 3S now"><span>Yes, it's out</span></label>
+                <label class="check"><input type="radio" name="entry.1815877606" value="Coming to Quest 3 / 3S soon"><span>Coming soon</span></label>
+                <label class="check"><input type="radio" name="entry.1815877606" value="No"><span>No</span></label>
+              </div>
+            </fieldset>
           </fieldset>
+
+          <fieldset class="flow-step" data-step="4" hidden>
+            <legend class="flow-q" tabindex="-1">What would you like me to make?</legend>
+            <fieldset class="field" data-group data-required><legend class="visually-hidden">What would you like me to make?</legend><p class="hint">Pick as many as you like.</p>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="Dedicated video"><span>Dedicated video</span></label>
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="Integrated segment (60-90 sec)"><span>60–90 sec segment</span></label>
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="YouTube Shorts"><span>YouTube Shorts</span></label>
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="Livestream"><span>Livestream</span></label>
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="Honest review"><span>Honest review</span></label>
+                <label class="check"><input type="checkbox" name="entry.1456612724" value="Recommend what works best"><span>You recommend</span></label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <fieldset class="flow-step" data-step="5" hidden>
+            <legend class="flow-q" tabindex="-1">What's the deal?</legend>
+            <p class="flow-sub">I'll send my rate after I review your application.</p>
+            <fieldset class="field" data-group data-required><legend>Type of deal</legend>
+              <div class="checks">
+                <label class="check"><input type="radio" name="entry.1962949812" value="Paid sponsorship"><span>Paid</span></label>
+                <label class="check"><input type="radio" name="entry.1962949812" value="Paid sponsorship + product or keys"><span>Paid + product or keys</span></label>
+                <label class="check"><input type="radio" name="entry.1962949812" value="Product or keys only"><span>Product or keys only</span></label>
+                <label class="check"><input type="radio" name="entry.1962949812" value="Affiliate / revenue share only"><span>Affiliate / rev share</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field" data-group data-required><legend>When should it go live?</legend>
+              <div class="checks">
+                <label class="check"><input type="radio" name="entry.1251506500" value="Within 2 weeks"><span>Within 2 weeks</span></label>
+                <label class="check"><input type="radio" name="entry.1251506500" value="This month"><span>This month</span></label>
+                <label class="check"><input type="radio" name="entry.1251506500" value="In 1-3 months"><span>In 1–3 months</span></label>
+                <label class="check"><input type="radio" name="entry.1251506500" value="Flexible"><span>Flexible</span></label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <fieldset class="flow-step" data-step="6" hidden>
+            <legend class="flow-q" tabindex="-1">Last step</legend>
+            <fieldset class="field" data-group data-required><legend class="visually-hidden">Audience check</legend>
+              <div class="checks checks-wide">
+                <label class="check"><input type="checkbox" name="entry.1164209588" value="My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content."><span>My product suits a young gaming audience: no gambling, crypto or NFTs, or adult content.</span></label>
+              </div>
+            </fieldset>
+            <div class="field"><label for="ap-notes">Anything else? <span class="opt">(optional)</span></label><textarea id="ap-notes" name="entry.634817505" rows="2"></textarea></div>
+          </fieldset>
+
           <div class="hp" aria-hidden="true"><label for="ap-fax">Leave this empty</label><input id="ap-fax" name="fax" type="text" tabindex="-1" autocomplete="off"></div>
           <p class="form-error" id="apply-error" role="alert" hidden></p>
-          <button class="btn btn-primary btn-lg" type="submit">Send application</button>
-          <p class="fine">Applications go straight to me. I don't share them.</p>
+
+          <div class="flow-nav">
+            <button class="btn btn-ghost flow-back" type="button" id="flow-back" hidden>Back</button>
+            <button class="btn btn-primary flow-next" type="submit" id="flow-next">Continue</button>
+          </div>
         </form>
 
-        <div class="apply-thanks" id="apply-thanks" tabindex="-1" hidden>
-          <h3>Application sent</h3>
-          <p id="apply-thanks-text">Thanks! I'll review it and reply by email within 5–7 business days if it's a fit, usually sooner.</p>
+        <div class="flow-card apply-thanks" id="apply-thanks" tabindex="-1" hidden>
+          <h2>Application sent</h2>
+          <p id="apply-thanks-text">Thanks! I read every application and reply by email within 5–7 business days if it's a fit, usually sooner.</p>
+          <a class="btn btn-ghost" href="index.html">Back to my channels</a>
         </div>
+
+        <p class="flow-alt">Prefer email? <a href="mailto:neutor22@gmail.com?subject=Partnership%20with%20NEUTOR">neutor22@gmail.com</a></p>
       </div>
     </section>
 
@@ -157,6 +195,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261005a" defer></script>
+  <script src="script.js?v=20261007a" defer></script>
 </body>
 </html>

@@ -143,99 +143,123 @@
     items.forEach((el) => rio.observe(el));
   }
 
-  /* ---------- Apply to sponsor: post to the Google Form ---------- */
+  /* ---------- Apply to sponsor: one short step at a time, then post to the Google Form ---------- */
   const applyForm = document.getElementById("apply-form");
   if (applyForm) {
+    const steps = [...applyForm.querySelectorAll(".flow-step")];
+    const total = steps.length;
+    const backBtn = document.getElementById("flow-back");
+    const nextBtn = document.getElementById("flow-next");
+    const countEl = document.getElementById("flow-count");
+    const bar = document.querySelector(".flow-bar");
+    const fill = document.getElementById("flow-bar-fill");
     const errorEl = document.getElementById("apply-error");
     const thanks = document.getElementById("apply-thanks");
     const thanksText = document.getElementById("apply-thanks-text");
-    const button = applyForm.querySelector('button[type="submit"]');
-    // Until the Google Form IDs are filled in, applications go out as a prefilled email instead
-    const formReady = !applyForm.action.includes("FORM_PUBLIC_ID");
-    const fallbackEmail = "neutor22@gmail.com";
-    const showError = (msg) => { errorEl.textContent = msg; errorEl.hidden = false; };
-    const showThanks = (msg) => {
-      if (msg) thanksText.textContent = msg;
-      applyForm.hidden = true;
-      thanks.hidden = false;
-      thanks.focus();
+    let current = 0;
+
+    const setProgress = (n) => {
+      fill.style.width = (n / total) * 100 + "%";
+      bar.setAttribute("aria-valuenow", String(Math.min(n, total)));
+    };
+    const clearError = () => { errorEl.hidden = true; };
+    const showError = (msg) => {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+      if (!reduceMotion) {
+        applyForm.classList.remove("shake");
+        void applyForm.offsetWidth; // restart the animation
+        applyForm.classList.add("shake");
+      }
     };
 
-    // Fields that only appear for one answer, e.g. "State your role" when Role is "Other"
-    applyForm.querySelectorAll("[data-show-when]").forEach((field) => {
-      const [id, value] = field.dataset.showWhen.split("=");
-      const trigger = document.getElementById(id);
-      const input = field.querySelector("input, textarea, select");
-      const sync = () => {
-        const show = trigger.value === value;
-        field.hidden = !show;
-        input.required = show;
-        if (!show) { input.value = ""; input.removeAttribute("aria-invalid"); }
-      };
-      trigger.addEventListener("change", () => { sync(); if (!field.hidden) input.focus(); });
-      sync();
-    });
+    function show(i, dir) {
+      steps[current].hidden = true;
+      current = i;
+      const step = steps[current];
+      step.hidden = false;
+      step.classList.remove("enter-next", "enter-back");
+      if (dir && !reduceMotion) step.classList.add(dir === "back" ? "enter-back" : "enter-next");
+      countEl.textContent = "Step " + (current + 1) + " of " + total;
+      setProgress(current + 1);
+      backBtn.hidden = current === 0;
+      nextBtn.textContent = current === total - 1 ? "Send application" : "Continue";
+      clearError();
+      if (dir) {
+        const firstText = step.querySelector("input[type=text], input[type=email], textarea");
+        (firstText || step.querySelector(".flow-q")).focus({ preventScroll: true });
+      }
+    }
 
-    function validate() {
-      let firstBad = null;
-      applyForm.querySelectorAll("input:not([type=checkbox]):not([name=fax]), textarea, select").forEach((el) => {
+    function validateStep(step) {
+      let firstBad = null, msg = "";
+      step.querySelectorAll("input[type=text], input[type=email], textarea").forEach((el) => {
         el.value = el.value.trim();
         if (el.hasAttribute("data-url") && el.value && !/^https?:\/\//i.test(el.value)) el.value = "https://" + el.value;
         const bad = !el.checkValidity() || (el.hasAttribute("data-url") && el.value && !/^https?:\/\/[^\s.]+\.[^\s]+$/i.test(el.value));
         el.setAttribute("aria-invalid", bad ? "true" : "false");
-        if (bad && !firstBad) firstBad = el;
+        if (bad && !firstBad) {
+          firstBad = el;
+          msg = !el.value ? "Please fill this in." : el.type === "email" ? "That email doesn't look right." : "That website doesn't look right.";
+        }
       });
-      applyForm.querySelectorAll("[data-group][data-required]").forEach((group) => {
+      step.querySelectorAll("[data-group][data-required]").forEach((group) => {
         const bad = !group.querySelector("input:checked");
         group.setAttribute("aria-invalid", bad ? "true" : "false");
-        if (bad && !firstBad) firstBad = group.querySelector("input");
+        if (bad && !firstBad) {
+          firstBad = group.querySelector("input");
+          msg = group.querySelector("input[type=checkbox]") && group.querySelectorAll("input").length === 1
+            ? "Please tick the box to continue." : "Please pick an option.";
+        }
       });
-      return firstBad;
+      return firstBad ? { el: firstBad, msg } : null;
     }
 
-    function asEmail() {
-      const lines = [];
-      applyForm.querySelectorAll(".form-step [data-label]:not([hidden])").forEach((field) => {
-        const values = [...field.querySelectorAll("input, textarea, select")]
-          .filter((el) => (el.type === "checkbox" ? el.checked : el.value))
-          .map((el) => el.value);
-        lines.push(field.dataset.label + ": " + (values.join(", ") || "-"));
-      });
-      const company = applyForm.querySelector("#ap-company").value;
-      return "mailto:" + fallbackEmail +
-        "?subject=" + encodeURIComponent("Sponsorship application: " + company) +
-        "&body=" + encodeURIComponent(lines.join("\n\n"));
-    }
+    // Clear the red state as soon as someone fixes it
+    applyForm.addEventListener("input", (e) => {
+      e.target.removeAttribute("aria-invalid");
+      const group = e.target.closest("[data-group]");
+      if (group) group.removeAttribute("aria-invalid");
+      clearError();
+    });
+    // Cmd/Ctrl+Enter in a text box moves on, like the Enter key does in single-line fields
+    applyForm.querySelectorAll("textarea").forEach((ta) => ta.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); applyForm.requestSubmit(); }
+    }));
+    backBtn.addEventListener("click", () => { if (current > 0) show(current - 1, "back"); });
 
     applyForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      errorEl.hidden = true;
-      const firstBad = validate();
-      if (firstBad) {
-        showError("Please fill in the highlighted fields.");
-        firstBad.focus();
-        return;
-      }
-      if (applyForm.elements.fax.value) { showThanks(); return; } // bot filled the hidden trap field
-      if (!formReady) {
-        window.location.href = asEmail();
-        showThanks("Your email app should open with your application filled in. Press send there and it reaches me. If nothing opened, email " + fallbackEmail + ".");
-        return;
-      }
-      button.disabled = true;
-      button.textContent = "Sending…";
+      const bad = validateStep(steps[current]);
+      if (bad) { showError(bad.msg); bad.el.focus(); return; }
+      if (current < total - 1) { show(current + 1, "next"); return; }
+
+      const company = applyForm.querySelector("#ap-company").value;
+      const done = () => {
+        applyForm.hidden = true;
+        thanks.hidden = false;
+        if (company) thanksText.textContent = "Thanks, " + company + "! I read every application and reply by email within 5–7 business days if it's a fit, usually sooner.";
+        countEl.textContent = "Done";
+        setProgress(total);
+        thanks.focus();
+      };
+      if (applyForm.elements.fax.value) { done(); return; } // bot filled the hidden trap field
+      nextBtn.disabled = true;
+      nextBtn.textContent = "Sending…";
       try {
         // Google Forms sends no CORS headers, so the response is opaque; reaching it counts as sent
         const data = new FormData(applyForm);
         data.delete("fax");
         await fetch(applyForm.action, { method: "POST", mode: "no-cors", body: data });
-        showThanks();
+        done();
       } catch (err) {
         showError("That didn't send. Check your connection and try again.");
-        button.disabled = false;
-        button.textContent = "Send application";
+        nextBtn.disabled = false;
+        nextBtn.textContent = "Send application";
       }
     });
+
+    show(0);
   }
 
   /* ---------- Hero: headsets float, then drop onto the platform ---------- */
